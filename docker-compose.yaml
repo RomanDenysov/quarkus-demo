@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  quarkus-db:
+    image: postgres:14.5-alpine
+    container_name: quarkus-postgres-demo
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg/data:/var/lib/postgresql/data/pgdata
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: demo
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    networks:
+      - quarkus
+
+  quarkus-app:
+    image: sokima/quarkus-demo
+    container_name: quarkus-app
+    ports:
+      - "8000:8000"
+    environment:
+      QUARKUS_DATASOURCE_URL: jdbc:postgresql://quarkus-db:5430/demo
+    restart: always
+    depends_on:
+      - quarkus-db
+    networks:
+      - quarkus
+
+networks:
+  quarkus:
+    driver: bridge
