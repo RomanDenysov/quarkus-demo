@@ -1,11 +1,8 @@
 package com.demo.resource;
 
-import io.quarkus.arc.All;
 import io.quarkus.runtime.configuration.ProfileManager;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

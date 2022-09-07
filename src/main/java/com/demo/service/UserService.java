@@ -1,5 +1,6 @@
 package com.demo.service;
 
+import com.demo.mapper.UserMapper;
 import com.demo.model.dto.CardDTO;
 import com.demo.model.dto.ContactInfoDTO;
 import com.demo.model.dto.UserDTO;
@@ -19,12 +20,14 @@ public class UserService {
 
     public UserDTO getById(Long id) {
         User user = (User) User.findByIdOptional(id).orElseThrow(() -> new WebApplicationException(404));
-        return setUser(user);
+        return UserMapper.INSTANCE.userToUserDTO(user);
     }
 
     public List<UserDTO> getAll() {
         List<User> users = User.findAll().list();
-        return setUsers(users);
+        return users.stream()
+                .map(UserMapper.INSTANCE::userToUserDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -63,45 +66,6 @@ public class UserService {
 
     public List<UserDTO> getUsersRestrict() {
         return User.findUserRestrictInfo();
-    }
-
-    private UserDTO setUser(User user) {
-        return UserDTO.builder()
-                .id(user.id)
-                .role(user.role)
-                .name(user.name)
-                .contactInfo(setContactInfo(user.contactInfo))
-                .cards(setCards(user.cards))
-                .build();
-    }
-
-    private List<UserDTO> setUsers(List<User> users) {
-        return users.stream()
-                .map(this::setUser)
-                .collect(Collectors.toList());
-    }
-
-    private ContactInfoDTO setContactInfo(ContactInfo contactInfo) {
-        return Objects.isNull(contactInfo) ? null : ContactInfoDTO.builder()
-                .id(contactInfo.id)
-                .email(contactInfo.email)
-                .phone(contactInfo.phone)
-                .telegram(contactInfo.telegram)
-                .build();
-    }
-
-    private CardDTO setCard(Card card) {
-        return Objects.isNull(card) ? null : CardDTO.builder()
-                .id(card.id)
-                .balance(card.balance)
-                .currency(card.currency)
-                .build();
-    }
-
-    private List<CardDTO> setCards(List<Card> cards) {
-        return cards.stream()
-                .map(this::setCard)
-                .collect(Collectors.toList());
     }
 
     private void isNull(UserDTO user) {

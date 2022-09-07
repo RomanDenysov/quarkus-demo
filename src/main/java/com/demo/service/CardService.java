@@ -73,7 +73,6 @@ public class CardService {
                 .id(card.id)
                 .balance(card.balance)
                 .currency(card.currency)
-                .users(setUsers(card.users))
                 .bills(setBills(card.bills))
                 .build();
     }

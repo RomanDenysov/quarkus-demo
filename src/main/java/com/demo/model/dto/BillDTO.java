@@ -18,6 +18,4 @@ public class BillDTO {
     private Instant paidDate;
 
     private Float total;
-
-    private CardDTO card;
 }

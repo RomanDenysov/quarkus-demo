@@ -16,6 +16,4 @@ public class ContactInfoDTO {
     private String email;
 
     private String telegram;
-
-    private UserDTO user;
 }

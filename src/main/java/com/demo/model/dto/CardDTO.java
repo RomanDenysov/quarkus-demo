@@ -18,7 +18,5 @@ public class CardDTO {
 
     private Currency currency;
 
-    private List<UserDTO> users;
-
     private List<BillDTO> bills;
 }
