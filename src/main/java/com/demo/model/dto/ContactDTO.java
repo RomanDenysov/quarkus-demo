@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactInfoDTO {
+public class ContactDTO {
     private Long id;
 
     private String phone;
@@ -16,4 +16,6 @@ public class ContactInfoDTO {
     private String email;
 
     private String telegram;
+
+    private Long userId;
 }

@@ -27,7 +27,6 @@ public class MapperTest {
         Assertions.assertEquals(userDTO.getName(), user.name);
         Assertions.assertEquals(userDTO.getRole(), user.role);
         Assertions.assertNull(user.cards);
-        Assertions.assertNull(user.contactInfo);
 
         Card card = new Card(1L, 200.0F, Currency.EUR, null, null);
         user.cards = List.of(card);
@@ -38,7 +37,6 @@ public class MapperTest {
         Assertions.assertEquals(user.name, userDTO1.getName());
         Assertions.assertEquals(user.role, userDTO1.getRole());
         Assertions.assertNotNull(userDTO1.getCards());
-        Assertions.assertNull(userDTO1.getContactInfo());
 
         CardDTO cardDTO = userDTO1.getCards().get(0);
 

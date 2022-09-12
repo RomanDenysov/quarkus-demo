@@ -1,8 +1,11 @@
 package com.demo.resource;
 
+import com.demo.model.dto.ContactDTO;
 import com.demo.model.dto.UserDTO;
+import com.demo.service.ContactService;
 import com.demo.service.UserService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -15,6 +18,10 @@ import java.util.List;
 public class UserResource {
     @Inject
     UserService userService;
+
+    @Inject
+    @RestClient
+    ContactService contactService;
 
     @GET
     @Operation(description = "Provides list of all users. " +
@@ -32,11 +39,21 @@ public class UserResource {
         return userService.getById(userId);
     }
 
+    @GET
+    @Path("{userId}/contacts")
+    public ContactDTO getUserContacts(@PathParam("userId") Long userId) {
+        UserDTO user = userService.getById(userId);
+        return contactService.getContact(user.getContactId());
+    }
+
     @POST
     @Operation(description = "Creates new unique user.")
     public Response createUser(UserDTO user) {
-        userService.create(user);
-        return Response.ok(user).status(201).build();
+        userService.createUser(user);
+        UserDTO userDTO = userService.getByName(user.getName());
+        ContactDTO contactDTO = contactService.createContact(userDTO.getId());
+        userService.updateContact(userDTO, contactDTO);
+        return Response.ok(userDTO).status(201).build();
     }
 
     @PUT
@@ -44,7 +61,7 @@ public class UserResource {
     @Operation(description = "Updates user.")
     public Response updateUserById(@PathParam("userId") Long userId,
                                    UserDTO user) {
-        userService.update(userId, user);
+        userService.updateUser(userId, user);
         return Response.ok(user).build();
     }
 
@@ -52,7 +69,7 @@ public class UserResource {
     @Path("{userId}")
     @Operation(description = "Deletes user.")
     public Response deleteUserById(@PathParam("userId") Long userId) {
-        userService.delete(userId);
+        userService.deleteUser(userId);
         return Response.noContent().build();
     }
 }

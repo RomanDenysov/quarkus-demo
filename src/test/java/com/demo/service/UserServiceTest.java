@@ -55,7 +55,7 @@ public class UserServiceTest {
                 .build();
 
         try {
-            userService.create(userToCreate);
+            userService.createUser(userToCreate);
 
             UserDTO createdUser = userService.getAll().stream()
                     .filter(u -> u.getName().equals("Ioan"))
@@ -69,10 +69,10 @@ public class UserServiceTest {
         }
 
         Assertions.assertThrows(WebApplicationException.class,
-                () -> userService.create(null));
+                () -> userService.createUser(null));
 
         Assertions.assertThrows(WebApplicationException.class,
-                () -> userService.create(userToCreate));
+                () -> userService.createUser(userToCreate));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class UserServiceTest {
                 .build();
 
         try {
-            userService.update(userToUpdateId, userToUpdate);
+            userService.updateUser(userToUpdateId, userToUpdate);
         } catch (WebApplicationException e) {
             Assertions.fail();
         }
@@ -97,13 +97,13 @@ public class UserServiceTest {
         Assertions.assertNotEquals(userToUpdate.getId(), updatedUser.getId());
 
         Assertions.assertThrows(WebApplicationException.class,
-                () -> userService.update(userToUpdateId, userToUpdate));
+                () -> userService.updateUser(userToUpdateId, userToUpdate));
 
         Assertions.assertThrows(WebApplicationException.class,
-                () -> userService.update(1000L, userToUpdate));
+                () -> userService.updateUser(1000L, userToUpdate));
 
         Assertions.assertThrows(WebApplicationException.class,
-                () -> userService.update(userToUpdateId, null));
+                () -> userService.updateUser(userToUpdateId, null));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class UserServiceTest {
                 .build();
 
         try {
-            userService.create(userToCreate);
+            userService.createUser(userToCreate);
 
             UserDTO user = userService.getAll()
                     .stream()
@@ -122,7 +122,7 @@ public class UserServiceTest {
                     .findFirst()
                     .orElseThrow(WebApplicationException::new);
 
-            userService.delete(user.getId());
+            userService.deleteUser(user.getId());
         } catch (WebApplicationException e) {
             Assertions.fail();
         }
@@ -135,6 +135,6 @@ public class UserServiceTest {
                         .orElseThrow(WebApplicationException::new));
 
         Assertions.assertThrows(WebApplicationException.class,
-                () -> userService.delete(1000L));
+                () -> userService.deleteUser(1000L));
     }
 }

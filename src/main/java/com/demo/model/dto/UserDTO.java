@@ -4,9 +4,8 @@ import com.demo.model.entity.Role;
 import lombok.*;
 
 import java.util.List;
-import java.util.Objects;
 
-@Getter @Builder
+@Getter @Builder @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id", "name"})
@@ -19,5 +18,5 @@ public class UserDTO {
 
     private List<CardDTO> cards;
 
-    private ContactInfoDTO contactInfo;
+    private Long contactId;
 }
