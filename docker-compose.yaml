@@ -1,35 +1,35 @@
-version: '3'
+version: '3.1'
 
 services:
   quarkus-db:
     image: postgres:14.5-alpine
     container_name: quarkus-postgres-demo
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: demo
+      PGDATA: /var/lib/postgresql/data
     ports:
       - "54321:5432"
-    volumes:
-      - ./pg/data:/var/lib/postgresql/data/pgdata
-    environment:
-      POSTGRES_USER: demo
-      POSTGRES_PASSWORD: demo
-      POSTGRES_DB: demo
-      PGDATA: /var/lib/postgresql/data/pgdata
     restart: always
-    networks:
-      - quarkus
+
+  adminer:
+    image: adminer
+    container_name: quarkus-postgres-adminer
+    ports:
+      - "8080:8080"
+    restart: always
 
   quarkus-app:
     image: sokima/quarkus-demo
+    build:
+      context: ./
+      dockerfile: src/main/docker/Dockerfile.jvm
     container_name: quarkus-app
     ports:
       - "8000:8000"
     environment:
-      QUARKUS_DATASOURCE_URL: jdbc:postgresql://quarkus-db:54321/demo
+      QUARKUS_DATASOURCE_URL: jdbc:postgresql://quarkus-db:5432/demo
     restart: always
     depends_on:
       - quarkus-db
-    networks:
-      - quarkus
-
-networks:
-  quarkus:
-    driver: bridge

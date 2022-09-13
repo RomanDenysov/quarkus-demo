@@ -47,7 +47,7 @@ public class User extends PanacheEntityBase {
     )
     public List<Card> cards = new ArrayList<>();
 
-    @Column(name = "contact_id")
+    @Column(name = "contact_id", unique = true)
     public Long contactId;
 
     public static Optional<User> findUserByName(String name) {
