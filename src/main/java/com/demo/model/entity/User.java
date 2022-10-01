@@ -67,10 +67,10 @@ public class User extends PanacheEntityBase {
         Query query = entityManager.createNativeQuery("SELECT u.name, u.role FROM users u");
         Stream<Object[]> stream = query.getResultStream();
         return stream.map(
-                objs -> UserDTO.builder()
-                        .name((String) objs[0])
-                        .role(Role.valueOf((String) objs[1]))
-                        .build())
+                        objs -> UserDTO.builder()
+                                .name((String) objs[0])
+                                .role(Role.valueOf((String) objs[1]))
+                                .build())
                 .collect(Collectors.toList());
     }
 }

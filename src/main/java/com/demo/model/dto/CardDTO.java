@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter @Builder
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CardDTO {

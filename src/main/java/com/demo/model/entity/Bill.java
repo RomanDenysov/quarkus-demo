@@ -32,6 +32,6 @@ public class Bill extends PanacheEntityBase {
     public Float total;
 
     @ManyToOne
-    @JoinColumn(name="card_id")
+    @JoinColumn(name = "card_id")
     public Card card;
 }

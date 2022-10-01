@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter @Builder @Setter
+@Getter
+@Builder
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id", "name"})

@@ -6,6 +6,7 @@ import com.demo.model.entity.Card;
 import com.demo.model.entity.Currency;
 import com.demo.model.entity.Role;
 import com.demo.model.entity.User;
+import com.demo.model.mapper.UserMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

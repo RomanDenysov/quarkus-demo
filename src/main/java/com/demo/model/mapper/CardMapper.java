@@ -1,4 +1,4 @@
-package com.demo.mapper;
+package com.demo.model.mapper;
 
 import com.demo.model.dto.CardDTO;
 import com.demo.model.entity.Card;
@@ -10,5 +10,6 @@ public interface CardMapper {
     CardMapper INSTANCE = Mappers.getMapper(CardMapper.class);
 
     CardDTO cardToCardDTO(Card card);
+
     Card cardDTOToCard(CardDTO cardDTO);
 }

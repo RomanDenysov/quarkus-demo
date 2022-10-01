@@ -1,6 +1,6 @@
 package com.demo.service.impl;
 
-import com.demo.mapper.UserMapper;
+import com.demo.model.mapper.UserMapper;
 import com.demo.model.dto.ContactDTO;
 import com.demo.model.dto.UserDTO;
 import com.demo.model.entity.User;
@@ -84,16 +84,16 @@ public class UserServiceImpl implements UserService {
     }
 
     private void isNull(UserDTO user) {
-        if(Objects.isNull(user)) {
+        if (Objects.isNull(user)) {
             throw new WebApplicationException(400);
         }
     }
 
     /**
      * throws exception if user already exist
-     * */
+     */
     private void isAlreadyExist(UserDTO user) {
-        if(User.findUserByName(user.getName()).isPresent()) {
+        if (User.findUserByName(user.getName()).isPresent()) {
             throw new WebApplicationException(400);
         }
     }

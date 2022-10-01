@@ -1,6 +1,7 @@
 package com.demo.scheduler;
 
 import io.quarkus.runtime.StartupEvent;
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -27,11 +28,12 @@ public class StateScheduler {
         scheduler.scheduleJob(jobDetail, trigger);
     }
 
+    @Slf4j
     public static class StateJob implements Job {
         @Override
         public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
             // here could be State Supervisor
-            System.out.println("Application is working...");
+            log.info("Application is working...");
         }
     }
 

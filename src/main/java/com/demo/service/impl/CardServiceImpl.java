@@ -1,6 +1,6 @@
 package com.demo.service.impl;
 
-import com.demo.mapper.CardMapper;
+import com.demo.model.mapper.CardMapper;
 import com.demo.model.dto.CardDTO;
 import com.demo.model.entity.Card;
 import com.demo.model.entity.User;

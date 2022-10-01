@@ -19,8 +19,9 @@ public class ProfileResource {
         return new Profile(ProfileManager.getActiveProfile());
     }
 
-    @AllArgsConstructor @Getter
+    @AllArgsConstructor
+    @Getter
     private static class Profile {
-        private String profile;
+        private final String profile;
     }
 }

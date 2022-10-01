@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Getter @Builder
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class BillDTO {

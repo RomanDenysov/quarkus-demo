@@ -1,4 +1,4 @@
-package com.demo.mapper;
+package com.demo.model.mapper;
 
 import com.demo.model.dto.UserDTO;
 import com.demo.model.entity.User;
@@ -10,5 +10,6 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
     UserDTO userToUserDTO(User user);
+
     User userDTOToUser(UserDTO userDTO);
 }
